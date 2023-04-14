@@ -1,0 +1,35 @@
+const Member = require("../model/User");
+const bcrypt = require("bcrypt");
+
+const handleNewUser = async (req, res) => {
+  console.log("request");
+  console.log(req.body);
+  const { username, emailId, password } = req.body;
+  console.log(username, password);
+
+  if (!username || !password)
+    return res.status(400).json({ message: "Username and password required" });
+  /*const duplicate = await Member.findOne({
+    $or: [{ username: username }, { emailId: emailId }],
+  }).exec();*/
+  const duplicate = await Member.findOne({ username: username }).exec();
+  console.log(duplicate);
+  if (duplicate) return res.sendStatus(409);
+  try {
+    const hashedPwd = await bcrypt.hash(password, 10);
+    console.log(hashedPwd);
+    const result = await Member.create({
+      username: username,
+      emailId: emailId,
+      password: hashedPwd,
+    });
+    console.log(result);
+
+    res.status(201).json({ success: `New User ${username} created` });
+    //res.redirect("/login");
+  } catch (err) {
+    res.status(500).json({ message: "not inserted" });
+  }
+};
+
+module.exports = { handleNewUser };
