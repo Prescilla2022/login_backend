@@ -31,5 +31,5 @@ app.use("/updatePassword", require("./routes/updatePassword"));
 
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB");
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  app.listen(PORT, () => res.send(`Server running on port ${PORT}`));
 });
