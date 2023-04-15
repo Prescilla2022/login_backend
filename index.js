@@ -20,8 +20,8 @@ app.get("/",  (req, res)=> {
 app.use(express.json());
 app.use(cors());
 //app.use(express.urlencoded({ extended: false }));
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+app.get((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Credentials", "true");
 });
 
 app.use("/register", require("./routes/register"));
