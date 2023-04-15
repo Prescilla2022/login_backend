@@ -10,7 +10,7 @@ const connectDB = require("./config/dbConn");
 connectDB();
 const cors = require("cors");
 
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT || 10000;
 app.use(express.static(path.resolve(__dirname, "./frontEnd/build")));
 // Step 2:
 app.get("*", function (request, response) {
