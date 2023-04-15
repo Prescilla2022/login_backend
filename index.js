@@ -13,8 +13,8 @@ const cors = require("cors");
 const PORT = process.env.PORT || 10000;
 app.use(express.static(path.resolve(__dirname, "./frontEnd/build")));
 // Step 2:
-app.get("/",  (req, res) {
-  res.send("server running"));
+app.get("/",  (req, res)=> {
+  res.send("server running");
 });
 
 app.use(express.json());
